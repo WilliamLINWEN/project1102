@@ -1,29 +1,48 @@
-<h2>Sign up</h2>
+<%= stylesheet_link_tag 'devise_sign_in_up' %>
+<style type="text/css">
+  body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/4/c/c/198283.jpg');
+  }
+</style>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class='container'>
+  <div class='card border-dark mb-3'>
+    <div class='card-header'>
+      <h3>Sign up</h2>
+    </div>
+    <div class="card-body">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div class="form-group">
+          <div class='input-group'>
+            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            <div class="input-icon right">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'email', required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class='input-group'>
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <div class="input-icon right">
+              <%= f.password_field :password, autocomplete: "current-password", class: 'form-control', placeholder: 'password', required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class='input-group'>
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <div class="input-icon right">
+              <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'password_confirmation', required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Sign up", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+    <div class='card-footer text-center'>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
