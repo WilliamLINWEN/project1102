@@ -7,13 +7,22 @@ App.chat = App.cable.subscriptions.create { channel: "ChatChannel", room_id: '1'
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    $('#messages').append "<p>" + data['message'] + "</p>"
+    if data['userID'] == userID
+    	$('.msg_history').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + data['message'] + "</p><span class='time_date'>" + data['message_created_at'] + "</span></div></div>")
+    else
+    	$('.msg_history').append("<div class='incoming_msg'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div><div class='received_msg'><div class='received_withd_msg'><p>" + data['message'] + "</p><span class='time_date'> " + data['message_created_at'] + "</span></div></div></div>")
 
   send_message: (message) ->
-  	@perform 'send_message', message: message, roomID: roomId
+  	@perform 'send_message', message: message, roomID: roomID
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 #return
     App.chat.send_message event.target.value
     event.target.value = ''
     event.preventDefault()
+
+$(document).on 'click', '#send_btn', (event) ->
+  input_field = $('input')[0]
+  App.chat.send_message input_field.value
+  input_field.value = ''
+  event.preventDefault()
