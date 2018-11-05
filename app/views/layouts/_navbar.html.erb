@@ -1,15 +1,15 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Project1102</a>
+      <a class="navbar-brand" href="/">Project1102</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><%= link_to 'Home' ,root_path %></li>
       <% if user_signed_in? %>
-        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
         <% if params[:controller] == 'home' && params[:action] == 'index' %>
-          <li><%= link_to 'Creat Room', new_chatroom_path %></li>
+          <li><%= link_to 'Creat Room', new_chatroom_path, data: {toggle: "modal", target: "#mainModal"} %></li>
         <% end %>
+        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
       <% end %>
     </ul>
   </div>

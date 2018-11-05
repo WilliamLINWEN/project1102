@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'chatrooms' %>
-<div class="container">
+
+<div class="container" id='chat-show'>
    <div class="messaging">
       <div class="inbox_msg">
          <div class="inbox_people">
@@ -9,83 +10,19 @@
                </div>
             </div>
             <div class="inbox_chat">
-               <div class="chat_list active_chat">
-                  <div class="chat_people">
-                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                     <div class="chat_ib">
-                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                        <p>Test, which is a new approach to have all solutions 
-                           astrology under one roof.
-                        </p>
+               <% @other_rooms.each do |room| %>
+                  <div class="chat_list active_chat">
+                     <div class="chat_people">
+                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                        <div class="chat_ib">
+                           <h5><%= room.last_message.user.email %><span class="chat_date"><%= room.last_message.created_at.strftime('%Y/%m/%d %H:%M:%S') %></span></h5>
+                           <p>
+                              <%= room.last_message.content %>
+                           </p>
+                        </div>
                      </div>
                   </div>
-               </div>
-               <div class="chat_list">
-                  <div class="chat_people">
-                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                     <div class="chat_ib">
-                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                        <p>Test, which is a new approach to have all solutions 
-                           astrology under one roof.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="chat_list">
-                  <div class="chat_people">
-                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                     <div class="chat_ib">
-                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                        <p>Test, which is a new approach to have all solutions 
-                           astrology under one roof.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="chat_list">
-                  <div class="chat_people">
-                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                     <div class="chat_ib">
-                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                        <p>Test, which is a new approach to have all solutions 
-                           astrology under one roof.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="chat_list">
-                  <div class="chat_people">
-                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                     <div class="chat_ib">
-                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                        <p>Test, which is a new approach to have all solutions 
-                           astrology under one roof.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="chat_list">
-                  <div class="chat_people">
-                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                     <div class="chat_ib">
-                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                        <p>Test, which is a new approach to have all solutions 
-                           astrology under one roof.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="chat_list">
-                  <div class="chat_people">
-                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                     <div class="chat_ib">
-                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                        <p>Test, which is a new approach to have all solutions 
-                           astrology under one roof.
-                        </p>
-                     </div>
-                  </div>
-               </div>
+               <% end %>
             </div>
          </div>
          <div class="mesgs">
@@ -95,7 +32,7 @@
             			<div class="outgoing_msg">
 									  <div class="sent_msg">
 									     <p><%= message.content %></p>
-									     <span class="time_date"><%= message.created_at %></span> 
+									     <span class="time_date"><%= message.created_at.strftime('%Y/%m/%d %H:%M:%S') %></span>
 									  </div>
 									</div>
             		<% else %>
@@ -104,7 +41,7 @@
 									  <div class="received_msg">
 									     <div class="received_withd_msg">
 									        <p><%= message.content %></p>
-									        <span class="time_date"><%= message.created_at %></span>
+									        <span class="time_date"><%= message.created_at.strftime('%Y/%m/%d %H:%M:%S') %></span>
 									     </div>
 									  </div>
 									</div>

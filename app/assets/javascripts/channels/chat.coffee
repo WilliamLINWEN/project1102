@@ -1,19 +1,29 @@
-App.chat = App.cable.subscriptions.create { channel: "ChatChannel", room_id: '1' },
-  connected: ->
-    # Called when the subscription is ready for use on the server
+$(document).on 'turbolinks:load', (event) ->
+  if $('#chat-show').length > 0
+    moveToBottom = (el, event, handler) ->
+      $('.msg_history').animate scrollTop: $('.msg_history')[0].scrollHeight
+      return
 
-  disconnected: ->
-    # Called when the subscription has been terminated by the server
+    moveToBottom()
 
-  received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
-    if data['userID'] == userID
-    	$('.msg_history').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + data['message'] + "</p><span class='time_date'>" + data['message_created_at'] + "</span></div></div>")
-    else
-    	$('.msg_history').append("<div class='incoming_msg'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div><div class='received_msg'><div class='received_withd_msg'><p>" + data['message'] + "</p><span class='time_date'> " + data['message_created_at'] + "</span></div></div></div>")
+    App.chat = App.cable.subscriptions.create { channel: "ChatChannel", room_id: roomID },
+      connected: ->
+        # Called when the subscription is ready for use on the server
 
-  send_message: (message) ->
-  	@perform 'send_message', message: message, roomID: roomID
+      disconnected: ->
+        # Called when the subscription has been terminated by the server
+
+      received: (data) ->
+        # Called when there's incoming data on the websocket for this channel
+        if data['userID'] == userID
+        	$('.msg_history').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + data['message'] + "</p><span class='time_date'>" + data['message_created_at'] + "</span></div></div>")
+        else
+        	$('.msg_history').append("<div class='incoming_msg'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div><div class='received_msg'><div class='received_withd_msg'><p>" + data['message'] + "</p><span class='time_date'> " + data['message_created_at'] + "</span></div></div></div>")
+
+        moveToBottom()
+
+      send_message: (message) ->
+      	@perform 'send_message', message: message, roomID: roomID
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 #return
