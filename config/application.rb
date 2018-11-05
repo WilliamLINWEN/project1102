@@ -15,5 +15,8 @@ module Project1102
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.autoload_paths += Dir["#{Rails.root}/lib"]
+    config.eager_load_paths += Dir["#{Rails.root}/lib"]
   end
 end

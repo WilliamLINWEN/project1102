@@ -1,0 +1,20 @@
+<%= form_for @room do |f| %>
+	<div class="modal-header">
+	  <h3 class="modal-title">What do you want to talk?</h5>
+	</div>
+	<div class="modal-body">
+	  <div class='container'>
+			<div class='row'>
+				<div class='form-group'>
+					<div class='input-group'>
+						<label>主題<%= f.text_field :title, class: 'form-control', required: true %></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<%= f.submit 'submit', class: 'btn btn-primary' %>
+	  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	</div>
+<% end %>
