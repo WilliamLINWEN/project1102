@@ -4,6 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :chatrooms
+  has_many :participants
+  has_many :chatrooms, through: :participants
   has_many :messages
+
+  def recently_attended_rooms
+  	chatrooms.where(id: messages.order(created_at: :desc).limit(5).collect(&:chatroom_id))
+  end
 end
