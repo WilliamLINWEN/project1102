@@ -1,0 +1,14 @@
+<h1>Chatrooms#show</h1>
+<p>Find me in app/views/chatrooms/show.html.erb</p>
+<div id='messages'>
+		<% @messages.each do |message| %>
+			<p><%= message.content %></p>
+		<% end %>
+</div>
+<p>
+	<%= text_field_tag 'message_input', nil, data: { behavior: "room_speaker"} %>
+</p>
+
+<script type="text/javascript">
+	var roomId = "<%= @room.id %>"
+</script>
