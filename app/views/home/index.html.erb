@@ -2,6 +2,8 @@
 <p>Find me in app/views/home/index.html.erb</p>
 <div class='container'>
 	<% @rooms.each do |room| %>
-		<%= link_to room.title, chatroom_path(room) %>
+		<p>
+			<%= link_to room.title, chatroom_path(room) %>
+		</p>
 	<% end %>
 </div>

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
 
-  resources :chatrooms, only: :show
+  resources :chatrooms, only: %w(show new create)
 end
