@@ -8,4 +8,8 @@ class Chatroom < ApplicationRecord
   def last_message
   	messages.last
   end
+
+  def master
+  	User.find(master_id)
+  end
 end
