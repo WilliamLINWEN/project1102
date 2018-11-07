@@ -12,16 +12,19 @@
 
 ActiveRecord::Schema.define(version: 2018_11_05_074706) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "chatrooms", force: :cascade do |t|
-    t.integer "master_id"
+    t.bigint "master_id"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "chatroom_id"
+    t.bigint "user_id"
+    t.bigint "chatroom_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 2018_11_05_074706) do
   end
 
   create_table "participants", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "chatroom_id"
+    t.bigint "user_id"
+    t.bigint "chatroom_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chatroom_id"], name: "index_participants_on_chatroom_id"
@@ -50,4 +53,8 @@ ActiveRecord::Schema.define(version: 2018_11_05_074706) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "participants", "chatrooms"
+  add_foreign_key "participants", "users"
 end
