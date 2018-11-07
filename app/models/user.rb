@@ -14,8 +14,6 @@ class User < ApplicationRecord
   	chatrooms.where(id: messages.order(created_at: :desc).limit(5).collect(&:chatroom_id))
   end
 
-  private
-
   def assign_avatar
     samples = ['identicon', 'monsterid', 'wavatar', 'retro', 'robohash']
     begin

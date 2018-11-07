@@ -18,7 +18,7 @@ $(document).on 'turbolinks:load', (event) ->
         if data['userID'] == userID
         	$('.msg_history').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + data['message'] + "</p><span class='time_date'>" + data['message_created_at'] + "</span></div></div>")
         else
-        	$('.msg_history').append("<div class='incoming_msg'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div><div class='received_msg'><div class='received_withd_msg'><p>" + data['message'] + "</p><span class='time_date'> " + data['message_created_at'] + "</span></div></div></div>")
+        	$('.msg_history').append("<div class='incoming_msg'><div class='incoming_msg_img'> <img src=" + data['avatar'] + "> </div><div class='received_msg'><div class='received_withd_msg'><p>" + data['message'] + "</p><span class='time_date'> " + data['message_created_at'] + "</span></div></div></div>")
 
         moveToBottom()
 
