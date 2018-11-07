@@ -20,5 +20,7 @@ test:
   <<: *default
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
+  database: df7t35j295lee9
+  username: <%= ENV['MYAPP_DATABASE_USERNAME'] %>
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
