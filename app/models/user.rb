@@ -50,6 +50,17 @@ class User < ApplicationRecord
     end
   end
 
+  def appear_down(room_number)
+    begin
+      room = Chatroom.find(room_number)
+      participant = participants.find_by(chatroom_id: room.id)
+      return if participant.blank?
+      participant.update(appearance: false)
+    rescue => e
+      Rails.logger.warn "User#appear_down"
+    end
+  end
+
   def assign_avatar
     samples = ['identicon', 'monsterid', 'wavatar', 'retro', 'robohash']
     begin
