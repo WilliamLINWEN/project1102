@@ -10,6 +10,7 @@
 #  number     :string
 #  slug       :text
 #
+# todo: coverimage https://picsum.photos/200/300/?random
 
 class Chatroom < ApplicationRecord
   include NumberGenerator
