@@ -40,10 +40,14 @@ class User < ApplicationRecord
   	chatrooms.where(id: messages.order(created_at: :desc).limit(5).collect(&:chatroom_id))
   end
 
-  def appear_on(room_id)
-    participant = participants.where(chatroom_id: room_id).blank?
-    return if participant.blank?
-    participant.last.update(appearance: true)
+  def appear_on(room_number)
+    begin
+      room = Chatroom.find(room_number)
+      participant = participants.where(chatroom_id: room.id)
+      return if participant.blank?
+      participant.last.update(appearance: true)
+    rescue => e
+    end
   end
 
   def assign_avatar

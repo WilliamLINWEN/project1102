@@ -13,4 +13,12 @@
 class Participant < ApplicationRecord
   belongs_to :user
   belongs_to :chatroom
+
+  after_update :broadcast_user_appear, if: Proc.new { |p| p.appearance }
+
+  private
+
+  def broadcast_user_appear
+  	BroadcasrUserAppearJob.perform_later self.chatroom
+  end
 end
