@@ -7,7 +7,7 @@
 					  <div class="panel-heading"><%= link_to room.title, chatroom_path(room) %></div>
 					  <div class="panel-body">
 					  	<%= link_to chatroom_path(room) do %>
-				  			<%= image_tag 'see-pic.png', class: "img-responsive", alt: 'Card Image' %>
+				  			<%= image_tag room.cover_image, class: "img-responsive", alt: 'Card Image' %>
 				  		<% end %>
 				  	</div>
 					</div>
