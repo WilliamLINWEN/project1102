@@ -1,8 +1,12 @@
 class ChatroomsController < ApplicationController
   def show
-    @room = Chatroom.friendly.find(params[:id])
-    current_user.chatrooms << @room
-    @messages = @room.messages.order(created_at: :desc).limit(20).reverse
+    begin
+      @room = Chatroom.friendly.find(params[:id])
+      current_user.chatrooms << @room unless current_user.chatrooms.include? @room
+      @messages = @room.messages.order(created_at: :desc).limit(20).reverse
+    rescue => e
+      redirect_to root_path
+    end
   end
 
   def new
