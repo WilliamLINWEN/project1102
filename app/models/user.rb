@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include NumberGenerator
+  extend FriendlyId
+  friendly_id :number, use: [:slugged, :finders]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,8 +13,20 @@ class User < ApplicationRecord
 
   after_create_commit :assign_avatar
 
+  def generate_number(options = {})
+    options[:prefix] ||= 'u'
+    options[:length] ||= 14
+    super(options)
+  end
+
   def recently_attended_rooms
   	chatrooms.where(id: messages.order(created_at: :desc).limit(5).collect(&:chatroom_id))
+  end
+
+  def appear_on(room_id)
+    participant = participants.where(chatroom_id: room_id).blank?
+    return if participant.blank?
+    participant.last.update(appearance: true)
   end
 
   def assign_avatar

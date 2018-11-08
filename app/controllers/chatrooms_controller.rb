@@ -1,7 +1,7 @@
 class ChatroomsController < ApplicationController
   def show
     @other_rooms = current_user.recently_attended_rooms
-    @room = Chatroom.find(params[:id])
+    @room = Chatroom.friendly.find(params[:id])
     @messages = @room.messages.order(created_at: :desc).limit(20).reverse
   end
 
