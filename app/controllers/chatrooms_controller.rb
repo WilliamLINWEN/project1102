@@ -11,6 +11,8 @@ class ChatroomsController < ApplicationController
 
   def new
     @room = Chatroom.new
+    @categories = Category.main_categories
+    @sub_categories = @categories.first.children
     render layout: false
   end
 
@@ -29,6 +31,6 @@ class ChatroomsController < ApplicationController
   private
 
   def chatroom_params
-    params.require(:chatroom).permit(:title)
+    params.require(:chatroom).permit(:title, :category_id)
   end
 end
