@@ -60,8 +60,8 @@
           $this.removeClass('panel-collapsed');
       }
   });
-  $(document).ready(function () {
-      $('.panel-heading span.clickable').click();
+  $(document).on('turbolinks:load',function () {
+      //$('.panel-heading span.clickable').click();
       //$('.panel div.clickable').click();
   });
 </script>
