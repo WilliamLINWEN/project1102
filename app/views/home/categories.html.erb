@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'chatroom_index' %>
 <div class="page-content">
+  <h1 class='title'>依類別尋找討論室</h1>
   <div class="main-content"> <!--main-content-->
     <div class="row">
       <div class="col-md-12">
@@ -12,7 +13,7 @@
                     <h3 class="panel-title" ><%= category.name %></h3>
                     <span class="pull-right clickable"><i class="fas fa-sort fa-lg"></i></span>
                   </div>
-                  <ul class="panel-body list-group" style="display: block;">
+                  <ul class="panel-body list-group category" style="display: block;">
                     <% category.children.each do |sub_category| %>
                       <li class="list-group-item clickable">
                         <%= link_to sub_category.name, root_path(category_id: sub_category.id) %>
@@ -62,6 +63,7 @@
   });
   $(document).on('turbolinks:load',function () {
       //$('.panel-heading span.clickable').click();
+      $('.panel-body.category').slideUp();
       //$('.panel div.clickable').click();
   });
 </script>

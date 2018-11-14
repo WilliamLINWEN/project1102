@@ -1,29 +1,36 @@
-<div class='container'>
-	<% @rooms.each_slice(3) do |rooms| %>
-		<div class='row'>
-			<% rooms.each do |room| %>
-				<div class='col-md-3'>
-					<div class="<%= random_panel_class %>">
-					  <div class="panel-heading">
-					  	<%= link_to room.title, chatroom_path(room), style: "font-size: 20px;" %>
-					  	<br><span style="font-size: 15px !important; color: #aaaaaa;">(<%= room.category.name %>)</span>
-					  </div>
-					  <div class="panel-body">
-					  	<%= link_to chatroom_path(room) do %>
-				  			<%= image_tag room.cover_image, class: "img-responsive", alt: 'Card Image' %>
-				  		<% end %>
-				  	</div>
-					</div>
+<%= stylesheet_link_tag 'chatroom_index' %>
+
+<div class="page-content">
+	<h1 class='title'><%= @category.name %></h1>
+	<div class="main-content">
+		<div class='container'>
+			<% @rooms.each_slice(3) do |rooms| %>
+				<div class='row'>
+					<% rooms.each do |room| %>
+						<div class='col-md-3'>
+							<div class="<%= random_panel_class %>">
+							  <div class="panel-heading">
+							  	<%= link_to room.title, chatroom_path(room), style: "font-size: 20px;" %>
+							  	<br><span style="font-size: 15px !important; color: #aaaaaa;">(<%= room.category.name %>)</span>
+							  </div>
+							  <div class="panel-body">
+							  	<%= link_to chatroom_path(room) do %>
+						  			<%= image_tag room.cover_image, class: "img-responsive", alt: 'Card Image' %>
+						  		<% end %>
+						  	</div>
+							</div>
+						</div>
+					<% end %>
 				</div>
 			<% end %>
 		</div>
-	<% end %>
-</div>
 
-<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= yield %>
-    </div>
-  </div>
+		<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <%= yield %>
+		    </div>
+		  </div>
+		</div>
+	</div>
 </div>
