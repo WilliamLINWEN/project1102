@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   resources :chatrooms, only: %w(show new create)
 
+  resources :categories, only: :index
   get 'get_sub_category', to: 'categories#get_sub_category'
 end
