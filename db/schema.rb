@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_021157) do
+ActiveRecord::Schema.define(version: 2018_11_14_030215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2018_11_14_021157) do
     t.string "number"
     t.text "slug"
     t.string "cover_image"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_chatrooms_on_category_id"
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
@@ -81,6 +83,7 @@ ActiveRecord::Schema.define(version: 2018_11_14_021157) do
   end
 
   add_foreign_key "categories", "categories", column: "parent_id"
+  add_foreign_key "chatrooms", "categories"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
   add_foreign_key "participants", "chatrooms"

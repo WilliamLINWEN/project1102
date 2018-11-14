@@ -21,6 +21,8 @@ class Chatroom < ApplicationRecord
   has_many 		:participants
   has_many		:users, through: :participants
 
+  belongs_to  :category
+
   after_create_commit :assign_master_id
   after_create_commit :assign_cover_image
 
