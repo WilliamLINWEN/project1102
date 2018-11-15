@@ -6,10 +6,18 @@
     <ul class="nav navbar-nav">
       <li class="active"><%= link_to 'Home' ,root_path %></li>
       <% if user_signed_in? %>
-        <% if params[:controller] == 'home' && params[:action] == 'index' %>
-          <li><%= link_to 'Creat Room', new_chatroom_path, data: {toggle: "modal", target: "#mainModal"} %></li>
-        <% end %>
-        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% if params[:controller] == 'home' && params[:action] == 'index' %>
+                <li><%= link_to 'Creat Room', new_chatroom_path(category_id: params[:category_id] ), data: {toggle: "modal", target: "#mainModal"} %></li>
+              <% end %>
+              <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+              <li role="separator" class="divider"></li>
+            </ul>
+          </li>
+        </ul>
       <% end %>
     </ul>
   </div>
