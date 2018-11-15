@@ -7,7 +7,7 @@
       <li class="active"><%= link_to 'Home' ,root_path %></li>
       <% if user_signed_in? %>
         <% if params[:controller] == 'home' && params[:action] == 'index' %>
-          <li><%= link_to 'Creat Room', new_chatroom_path, data: {toggle: "modal", target: "#mainModal"} %></li>
+          <li><%= link_to 'Creat Room', new_chatroom_path(category_id: params[:category_id] ), data: {toggle: "modal", target: "#mainModal"} %></li>
         <% end %>
         <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
       <% end %>

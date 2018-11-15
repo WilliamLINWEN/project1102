@@ -10,9 +10,14 @@ class ChatroomsController < ApplicationController
   end
 
   def new
+    if Category.exists?(id: params[:category_id])
+      @categories = Category.main_categories
+      @sub_categories = Category.find(params[:category_id]).parent.children
+    else
+      @categories = Category.main_categories
+      @sub_categories = @categories.first.children
+    end
     @room = Chatroom.new
-    @categories = Category.main_categories
-    @sub_categories = @categories.first.children
     render layout: false
   end
 
