@@ -9,17 +9,21 @@
             <% sub_categories.each do |category| %>
               <div class="col-md-3">
                 <div class="panel panel-warning" >
-                  <div class="panel-heading ">
+                  <div class="panel-heading clickable" id="cb_<%= category.id %>">
                     <h3 class="panel-title" ><%= category.name %></h3>
                     <span class="pull-right clickable"><i class="fas fa-sort fa-lg"></i></span>
                   </div>
-                  <ul class="panel-body list-group category" style="display: block;">
-                    <% category.children.each do |sub_category| %>
-                      <li class="list-group-item clickable">
-                        <%= link_to sub_category.name, root_path(category_id: sub_category.id) %>
-                      </li>
-                    <% end %>
-                  </ul>
+                  <div class='collapse' id="category_<%= category.id %>">
+                    <div class='panel-body'>
+                      <ul>
+                        <% category.children.each do |sub_category| %>
+                          <li class="list-group-item clickable">
+                            <%= link_to sub_category.name, root_path(category_id: sub_category.id) %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             <% end %>
@@ -41,29 +45,7 @@
 </div>
 <script type="text/javascript">
   // JavaScript Document
-  $(document).on('click', '.panel-heading span.clickable', function (e) {
-      var $this = $(this);
-      if (!$this.hasClass('panel-collapsed')) {
-          $this.parents('.panel').find('.panel-body').slideUp();
-          $this.addClass('panel-collapsed');
-      } else {
-          $this.parents('.panel').find('.panel-body').slideDown();
-          $this.removeClass('panel-collapsed');
-      }
-  });
-  $(document).on('click', '.panel div.clickable', function (e) {
-      var $this = $(this);
-      if (!$this.hasClass('panel-collapsed')) {
-          $this.parents('.panel').find('.panel-body').slideUp();
-          $this.addClass('panel-collapsed');
-      } else {
-          $this.parents('.panel').find('.panel-body').slideDown();
-          $this.removeClass('panel-collapsed');
-      }
-  });
-  $(document).on('turbolinks:load',function () {
-      //$('.panel-heading span.clickable').click();
-      $('.panel-body.category').slideUp();
-      //$('.panel div.clickable').click();
+  $(document).on('click', '.panel-heading.clickable', function (e) {
+      $(this).parent().children('.collapse').collapse('toggle');
   });
 </script>
