@@ -24,7 +24,7 @@ class Chatroom < ApplicationRecord
   belongs_to  :category
 
   after_create_commit :assign_master_id
-  after_create_commit :assign_cover_image
+  after_create_commit { RoomJob.perform_later(self) }
 
   def generate_number(options = {})
     options[:prefix] ||= 'r'
@@ -44,10 +44,5 @@ class Chatroom < ApplicationRecord
 
   def assign_master_id
     self.update(master_id: self.users.last.id)
-  end
-
-  def assign_cover_image
-    image_url = "https://picsum.photos/200/300/?image=" + Random.new.rand(1000).to_s
-    self.update(cover_image: image_url)
   end
 end

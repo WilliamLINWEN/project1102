@@ -8,9 +8,3 @@ development:
 
 test: *redis
 
-production:
-  url: <%= ENV.fetch("REDIS_URL") %>
-  channel_prefix: project1102_production
-  host: <%= ENV.fetch("REDIS_HOST") %>
-  password: <%= ENV.fetch('REDIS_PASSWORD') %>
-  port: 9379
